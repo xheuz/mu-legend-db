@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const Class = require('../models');
+const Models = require('../models');
 
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -11,7 +11,7 @@ app.use(function (req, res, next) {
 app.get('/classes', function (req, res) {
     res.contentType('application/json');
 
-    Class.Class.findAll().then(classes => {
+    Models.Class.findAll().then(classes => {
         res.send(classes);
     })
 });
@@ -19,7 +19,7 @@ app.get('/classes', function (req, res) {
 app.get('/classes/:id/skills', function (req, res) {
     res.contentType('application/json');
 
-    Class.Class.findById(req.params.id).then(desiredClass => {
+    Models.Class.findById(req.params.id).then(desiredClass => {
         desiredClass.getSkills().then(classSkills => {
             res.send(classSkills);
         })
