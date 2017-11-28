@@ -1,5 +1,8 @@
+const express = require('express');
+const app = express();
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('mysql://root:root@localhost:3306/mudb');
+const Op = Sequelize.Op;
+const sequelize = new Sequelize('mysql://root:root@localhost:3306/mudb', { operatorsAliases: Op });
 
 const Class = sequelize.define('class', {
     id: {
@@ -37,64 +40,43 @@ const Skill = sequelize.define('skill', {
         freezeTableName: true,
 
     });
-    
-const ClassAndSkills = sequelize.define('class_skill', {
-    id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true
-    },
-    class_id: {
-        type: Sequelize.INTEGER
-    },
-    skill_id: {
-        type: Sequelize.INTEGER
-    },
-}, {
-        timestamps: false,
-        freezeTableName: true,
 
-    });
+Class.hasMany(Skill, {
+    foreignKey: 'class_id',
+    sourceKey: 'id'
+});
 
-Class.belongsToMany(Skill, { as: 'skillsFromClass', through: ClassAndSkills, foreignKey: 'class_id' })
-Skill.belongsToMany(Class, { as: 'class', through: ClassAndSkills, foreignKey: 'skill_id' })
+Skill.belongsTo(Class, { foreignKey: 'class_id' });
 
-Class.getSkillsFromClass().then(associatedTasks => {
-    // associatedTasks is an array of tasks
+Class.findAll().then(users => {
+    console.log(users)
 })
 
-// var express = require('express');
-// var app = express();
-// // neo4j definition
-// var db = require('seraph')('http://localhost:7474');
-// var Class = require('seraph-model')(db, 'Class');
-// var Skill = require('seraph-model')(db, 'Skill');
-// var resource = require('seraph-resource');
-// Class.compose(Skill, 'skillSet', 'HAS');
+const skill = Skill.build();
+const classes = Class.build();
 
-// app.use(function (req, res, next) {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//     next();
-// });
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
-// app.get('/classes', function (req, res) {
-//     res.contentType('application/json');
+app.get('/classes', function (req, res) {
+    res.contentType('application/json');
 
-//     Class.findAll(function (err, classes) {
-//         if (err) throw err;
+    Class.findAll().then(classes => {
+        res.send(classes);
+    })
+});
 
-//         res.send(classes);
-//     });
-// });
+app.get('/classes/:id/skills', function (req, res) {
+    res.contentType('application/json');
 
-// app.get('/classes/:id/skills', function (req, res) {
-//     res.contentType('application/json');
+    Class.findById(req.params.id).then(desiredClass => {
+        res.send(desiredClass.getSkills());
+    })
+});
 
-//     Class.read(req.params.id, function (err, desiredClass) {
-//         res.send(desiredClass.skillSet);
-//     });
-// });
-
-// var Classes = resource(Class);
-// app.use(Classes);
-// app.listen(7475)
+var Classes = resource(Class);
+app.use(Classes);
+app.listen(7475)
