@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-    const Class = sequelize.define('classes', {
+    const Class = sequelize.define('class', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true
@@ -10,12 +10,10 @@ module.exports = (sequelize, DataTypes) => {
         }
     }, {
             timestamps: false,
-            freezeTableName: true,
-
         });
 
     Class.associate = function (models) {
-    models.classes.hasMany(models.skills, {
+    models.class.hasMany(models.skill, {
         foreignKey: 'class_id',
         sourceKey: 'id'
     });
