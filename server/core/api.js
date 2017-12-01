@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('mysql://root:root@localhost:3306/mudb');
+const sequelize = new Sequelize('mysql://mu:mu@172.28.6.52:3306/mudb');
 
 
 sequelize

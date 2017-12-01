@@ -601,7 +601,7 @@ a.list-group-item:hover {
 }
 /*----*/
 .banner2{
-background:url(../images/bnr.jpg) no-repeat 0px 0px;
+background:url(../images/MU2ZEN-MU-Legend-wallpaper-03.jpg) no-repeat 0px 0px;
 	background-size:cover;
 	min-height:250px;
 }
@@ -1644,11 +1644,11 @@ ul.grid-part li a{
     font-size: 1.4em;
 }
 .banner {
-    background: url(../images/bnr.jpg) no-repeat -313px 0px;
+    background: url(../images/MU2ZEN-MU-Legend-wallpaper-03.jpg) no-repeat -313px 0px;
     background-size: cover;
 }
 .banner2 {
-    background: url(../images/bnr.jpg) no-repeat 0px 0px;
+    background: url(../images/MU2ZEN-MU-Legend-wallpaper-03.jpg) no-repeat 0px 0px;
     background-size: cover;
 }
 }
@@ -2067,4 +2067,16 @@ h5.act a,h5.race a,h5.sport a,h5.arc a{
 .table td, .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
     padding: 7px!important;
 }
+}
+
+.img-wrapper{
+    display: inline-block;
+    height: 418px;
+    width: 200px;
+    background-color: red;
+}
+
+.stats {
+    height: 418px;
+    background-color: whitesmoke;
 }
