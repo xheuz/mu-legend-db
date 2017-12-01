@@ -19,6 +19,14 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     }
+
+    Class.associate = function (models) {
+        models.class.hasMany(models.subclass, {
+            foreignKey: 'class_id',
+            sourceKey: 'id'
+        });
+
+    }
     const classes = Class.build();
 
     return Class;
