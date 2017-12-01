@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-    const Skill = sequelize.define('Skill', {
+    const Skill = sequelize.define('skills', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true
@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
         });
 
     Skill.associate = function (models) {
-        models.Skill.belongsTo(models.Class, { foreignKey: 'class_id' });
+        models.skills.belongsTo(models.classes, { foreignKey: 'class_id' });
     }
     const skill = Skill.build();
 

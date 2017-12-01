@@ -11,7 +11,7 @@ app.use(function (req, res, next) {
 app.get('/classes', function (req, res) {
     res.contentType('application/json');
 
-    Models.Class.findAll().then(classes => {
+    Models.classes.findAll().then(classes => {
         res.send(classes);
     })
 });
@@ -19,7 +19,7 @@ app.get('/classes', function (req, res) {
 app.get('/classes/:id/skills', function (req, res) {
     res.contentType('application/json');
 
-    Models.Class.findById(req.params.id).then(desiredClass => {
+    Models.classes.findById(req.params.id).then(desiredClass => {
         desiredClass.getSkills().then(classSkills => {
             res.send(classSkills);
         })
