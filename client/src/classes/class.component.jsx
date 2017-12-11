@@ -38,7 +38,7 @@ class Character extends Component {
         .then(data => {
             let characters = data.map( (character) => {
                return (
-                    <Col xs={6} md={4} key={character.id}>
+                    <Col xs={6} md={6} key={character.id}>
                         <a className="class-skills" href={'/classes/' + character.id }>
                             <Thumbnail src={images[character.id]} alt="242x200">
                                 <h3>

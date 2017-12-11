@@ -16,6 +16,7 @@ const groupByType = function(arr) {
             groups[arr[element].type].push(arr[element]);
         } else {
             groups[arr[element].type] = [];
+            groups[arr[element].type].push(arr[element]);
         }
     }
 
@@ -42,9 +43,9 @@ class ClassDetails extends Component {
             let skills = {};
 
             for(var type in data) {
-                skills[type] = data[type].map((skill) => {
+                skills[type] = data[type].map((skill, indx) => {
                     return(
-                        <Col xs={6} md={4} key={skill.id}>
+                        <Col xs={12} md={4} key={skill.id}>
                         <div className="skill">
                             <div className="skill-header">
                                 <img className="skill-image float-left" src={images_url + '/' + skill.id + '.png'} alt={"skill-" + skill.name} />
@@ -53,11 +54,11 @@ class ClassDetails extends Component {
                             </div>
                             <div className="skill-body">
                                 <p>{skill.description}</p>
-                                <Badge>type: {skill.type}</Badge> &nbsp;
+                                {/* <Badge>type: {skill.type}</Badge> &nbsp; */}
                                 {skill.damage !== null ? <Badge>damage: {skill.damage}% </Badge> : ""}
                             </div>
                         </div>
-                        </Col>
+                    </Col>
                     )
                 });
             }
@@ -66,17 +67,30 @@ class ClassDetails extends Component {
     }
 
     render(){
+        let key = 0;
+
+        for(var property in this.state.skills) {
+            let columns = [];
+            let indx = 0;
+            for(var skill in this.state.skills[property]) {
+                if (indx % 3 === 0) {
+                    columns.push(
+                        <Row key={key}>{this.state.skills[property].slice(indx,indx+3)}</Row>
+                    );
+                    key++;
+                }
+                indx++;
+            }
+            this.state.skills[property] = columns;
+        };
         return(
             <div>
-                <Row>
-                    {this.state.skills['Weapon']}
-                </Row>
-                <Row>
-                    {this.state.skills['Class']}
-                </Row>
-                <Row>
-                    {this.state.skills['Expert']}
-                </Row>
+                <h2>Weapon</h2>
+                {this.state.skills['Weapon']}
+                <h2>Class</h2>
+                {this.state.skills['Class']}
+                <h2>Expert</h2>
+                {this.state.skills['Expert']}
             </div>
         )
     }
