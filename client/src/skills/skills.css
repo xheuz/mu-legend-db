@@ -1,0 +1,77 @@
+.gradient-orange-light {
+    background: #ff6600; /* Old browsers */
+    background: -moz-radial-gradient(100% top left, ellipse cover, #ff6600 0%, #fc6d0e 37%, #ff7620 58%,#ff4800 70%,#ff7620 80%); /* FF3.6-15 */
+    background: -webkit-radial-gradient(100% at top left, ellipse cover, #ff6600 0%,#fc6d0e 37%,#ff7620 58%,#ff4800 70%,#ff7620 80%); /* Chrome10-25,Safari5.1-6 */
+    background: radial-gradient(ellipse at top left, #ff6600 0%,#fc6d0e 37%,#ff7620 58%,#ff4800 70%, #ff7620 80%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff6600', endColorstr='#fb955e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.gradient-orange {
+    background: #ff6600; /* Old browsers */
+    background: -moz-radial-gradient(100% top left, ellipse cover, #ff6600 0%, #ff4800 37%, #ff4800 58%,#fc6d0e 70%,#ff7620 80%); /* FF3.6-15 */
+    background: -webkit-radial-gradient(100% at top left, ellipse cover, #ff6600 0%,#ff4800 37%,#ff4800 58%,#fc6d0e 70%,#ff7620 80%); /* Chrome10-25,Safari5.1-6 */
+    background: radial-gradient(ellipse at top left, #ff6600 0%,#ff4800 37%,#ff4800 58%,#fc6d0e 70%, #ff7620 80%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff6600', endColorstr='#fb955e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.skill {
+    margin-bottom: 20px;
+    background-color: white;
+}
+
+.skill-header {
+    background-color: #ff6600;
+    border: 1px solid rgb(231, 230, 230);
+    padding: 8px 10px;
+    border-right: 2px solid #eee;
+    position: relative;
+}
+
+.skill-header * {
+    display: inline-block;
+}
+
+.skill-image {
+    width: 52px;
+    height: 52px;
+    border: 3px solid orange;
+    border-radius: 5px;
+}
+
+.skill-name {
+    color: white;
+    font-weight: bold;
+    font-variant: all-small-caps;
+    text-transform: capitalize;
+    font-size: 22px;
+    line-height: 22px;
+    overflow-wrap: break-word;
+    max-width: 220px;
+    margin: 0 0 0 15px;
+    vertical-align: middle;
+}
+
+.skill-body {
+    border: 1px solid rgb(231, 230, 230);
+    border-top: 0;
+    margin: 0 auto;
+    padding: 8px 10px 15px 10px;
+    border-bottom: 2px solid #eee;
+    border-right: 2px solid #eee;
+}
+
+.skill-kind {
+    position: absolute;
+    right: 0;
+    top: 0;
+    border-radius: 0;
+    border-bottom-left-radius: 5px;
+}
+
+.skill-active {
+    background-color: rgb(190, 29, 29);
+}
+
+.skill-passive {
+    background-color: rgb(29, 85, 190);
+}
