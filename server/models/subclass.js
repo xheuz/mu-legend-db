@@ -1,4 +1,6 @@
 'use strict';
+const imgUrl = 'http://mulegendb.info/server/images/';
+
 module.exports = (sequelize, DataTypes) => {
     const Subclass = sequelize.define('subclass', {
         id: {
@@ -28,6 +30,11 @@ module.exports = (sequelize, DataTypes) => {
         }
     }, {
             timestamps: false,
+            getterMethods: {
+                imgUrl: function () {
+                    return imgUrl + 'subclasses/' + this.id + '.png';
+                }
+            }
         });
 
     Subclass.associate = function (models) {
