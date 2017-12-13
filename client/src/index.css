@@ -2,9 +2,14 @@
   box-sizing: border-box;
 }
 
+html,
 body {
+  height: 100%;
   margin: 0;
-  padding: 70px 0 0 0;
+}
+
+body {
+  padding: 86px 0 0 0;
   font-family: sans-serif;
   background-color: whitesmoke;
 }

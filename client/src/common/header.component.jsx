@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import './header.css';
 
 class Navigation extends Component {
@@ -8,7 +8,7 @@ class Navigation extends Component {
             <Navbar fixedTop>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <a href="/">Mu Legend Database</a>
+                        <a className="navbar-brand" href="/"><div className="logo">DB</div></a>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>

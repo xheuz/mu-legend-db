@@ -75,3 +75,12 @@
 .skill-passive {
     background-color: rgb(29, 85, 190);
 }
+
+.skill-type {
+    text-align: center;
+    background-color: white;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #eee;
+    border-bottom: 3px solid #eee;
+}

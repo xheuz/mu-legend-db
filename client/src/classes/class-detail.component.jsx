@@ -3,6 +3,7 @@ import Skills from '../skills/skill.component';
 import './class-detail.css';
 
 class ClassDetails extends Component {
+    
     constructor(props) {
         super(props);
         this.state = {}
@@ -13,7 +14,7 @@ class ClassDetails extends Component {
 
     render(){
         return(
-            <Skills {...this.props}/>
+            <Skills classId={this.props.location.pathname}/>
         )
     }
 }

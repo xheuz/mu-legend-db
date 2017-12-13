@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { Row, Col, Grid, Thumbnail } from 'react-bootstrap';
 import './class.css';
 
-const url = 'http://ec2-52-27-199-57.us-west-2.compute.amazonaws.com:7475';
-
 const images = {
     1: "https://i.ytimg.com/vi/5Yyl07UmdDE/maxresdefault.jpg",
     2: "https://i.ytimg.com/vi/fR-46pk_Gtc/maxresdefault.jpg",
@@ -33,7 +31,7 @@ class Character extends Component {
     }
 
     CharacterList() {
-        fetch(url + '/classes')
+        fetch('http://ec2-52-27-199-57.us-west-2.compute.amazonaws.com:7475/classes')
         .then( (results) => results.json())
         .then(data => {
             let characters = data.map( (character) => {
@@ -52,9 +50,7 @@ class Character extends Component {
                     </Col>
                 )
             });
-            // console.log(characters);
             this.setState({characters: characters});
-            // console.log("state", this.state.characters);
         });
     }
 

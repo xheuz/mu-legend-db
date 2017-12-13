@@ -9,11 +9,11 @@ import ClassDetails from '../classes/class-detail.component'
 // Configure all routes here
 const Main = () => (
     <Switch>
-        <Route exact path='/' component={Home}/>
-        <Route exact path='/classes' component={Classes}/>
-        <Route exact path='/classes/:classid' component={ClassDetails}/>
-        <Route exact path='/instances' component={Instances}/>
-        <Route exact path='/items' component={Items}/>
+        <Route exact path='/' component={Classes} />
+        <Route exact path='/classes' component={Classes} />
+        <Route exact path='/classes/:classid' component={ClassDetails} />
+        <Route exact path='/instances' component={Instances} />
+        <Route exact path='/items' component={Items} />
     </Switch>
 )
 
