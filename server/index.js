@@ -16,12 +16,35 @@ app.get('/classes', function (req, res) {
     })
 });
 
+app.get('/classes/:id', function (req, res) {
+    res.contentType('application/json');
+
+    Models.class.findAll({
+        where: {
+            id: req.params.id
+        },
+        include: [Models.skill, Models.subclass]
+    }).then(classes => {
+        res.send(classes);
+    })
+});
+
 app.get('/classes/:id/skills', function (req, res) {
     res.contentType('application/json');
 
     Models.class.findById(req.params.id).then(desiredClass => {
         desiredClass.getSkills().then(classSkills => {
             res.send(classSkills);
+        })
+    })
+});
+
+app.get('/classes/:id/subclasses', function (req, res) {
+    res.contentType('application/json');
+
+    Models.class.findById(req.params.id).then(desiredClass => {
+        desiredClass.getSubclasses().then(classSubclasses => {
+            res.send(classSubclasses);
         })
     })
 });
@@ -47,16 +70,6 @@ app.get('/subclasses', function (req, res) {
 
     Models.subclass.findAll().then(subclasses => {
         res.send(subclasses);
-    })
-});
-
-app.get('/classes/:id/subclasses', function (req, res) {
-    res.contentType('application/json');
-
-    Models.class.findById(req.params.id).then(desiredClass => {
-        desiredClass.getSubclasses().then(classSubclasses => {
-            res.send(classSubclasses);
-        })
     })
 });
 
