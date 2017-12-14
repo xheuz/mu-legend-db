@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-    const Skill = sequelize.define('skill', {
+    const Artifact = sequelize.define('artifact', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true
@@ -8,26 +8,20 @@ module.exports = (sequelize, DataTypes) => {
         name: {
             type: DataTypes.STRING
         },
-        description: {
+        basic_effect: {
             type: DataTypes.STRING
         },
-        damage: {
-            type: DataTypes.STRING
+        per_level_increase: {
+            type: DataTypes.DOUBLE
         },
-        type: {
-            type: DataTypes.STRING
-        },
-        kind: {
+        lvl20_effect: {
             type: DataTypes.STRING
         }
     }, {
             timestamps: false,
         });
 
-    Skill.associate = function (models) {
-        models.skill.belongsTo(models.class, { foreignKey: 'class_id' });
-    }
-    const skill = Skill.build();
+    const artifacts = Artifact.build();
 
-    return Skill;
+    return Artifact;
 };
