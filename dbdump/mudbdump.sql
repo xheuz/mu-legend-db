@@ -64,7 +64,7 @@ CREATE TABLE `auras` (
 
 LOCK TABLES `auras` WRITE;
 /*!40000 ALTER TABLE `auras` DISABLE KEYS */;
-INSERT INTO `auras` VALUES (1,'Attack Aura'),(2,'Defense Aura'),(3,'Healing Aura'),(4,'Attack Acceleration'),(5,'Defense Acceleration'),(6,'Skin'),(7,'Ignite'),(8,'Cold'),(9,'Rage: Ensnare'),(10,'Rage: Freeze'),(11,'Invincibility Aura'),(12,'Rage: Knockback'),(13,'Fiery Chain'),(14,'Rage: Stun'),(15,'Rage: Fear'),(16,'Great Oblivion Explision'),(17,'Lightning Ring'),(18,'Fire Ring'),(19,'Mana Burn'),(20,'Multiplication'),(21,'Rage: Slow'),(22,'Weakening Curse'),(23,'Fiery Crash'),(24,'Rage: Airborne'),(25,'Rage: Blind'),(26,'Oblivion Explision'),(27,'Wave'),(28,'Swamp Aura'),(29,'Swamp Ghost'),(30,'Fire Ghost'),(31,'Black Hole'),(32,'Bulwark'),(33,'Big Fish'),(34,'Catch Him'),(35,'Contaminated Area'),(36,'Tsunami'),(37,'Oblivion Explosion'),(38,'Buckshot');
+INSERT INTO `auras` VALUES (1,'Attack Aura'),(2,'Defense Aura'),(3,'Healing Aura'),(4,'Attack Acceleration'),(5,'Defense Acceleration'),(6,'Skin'),(7,'Ignite'),(8,'Cold'),(9,'Rage: Ensnare'),(10,'Rage: Freeze'),(11,'Invincibility Aura'),(12,'Rage: Knockback'),(13,'Fiery Chain'),(14,'Rage: Stun'),(15,'Rage: Fear'),(16,'Great Oblivion Explosion'),(17,'Lightning Ring'),(18,'Fire Ring'),(19,'Mana Burn'),(20,'Multiplication'),(21,'Rage: Slow'),(22,'Weakening Curse'),(23,'Fiery Crash'),(24,'Rage: Airborne'),(25,'Rage: Blind'),(26,'Oblivion Explision'),(27,'Wave'),(28,'Swamp Aura'),(29,'Swamp Ghost'),(30,'Fire Ghost'),(31,'Black Hole'),(32,'Bulwark'),(33,'Big Fish'),(34,'Catch Him'),(35,'Contaminated Area'),(36,'Tsunami'),(37,'Oblivion Explosion'),(38,'Buckshot');
 /*!40000 ALTER TABLE `auras` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -102,16 +102,16 @@ DROP TABLE IF EXISTS `endless_tower`;
 CREATE TABLE `endless_tower` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `stage_id` int(11) NOT NULL,
-  `mobs_id` int(11) NOT NULL,
-  `auras_id` int(11) NOT NULL,
+  `mobs_id` int(11) DEFAULT NULL,
+  `auras_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_mobs_has_auras_auras1_idx` (`auras_id`),
-  KEY `fk_mobs_has_auras_mobs1_idx` (`mobs_id`),
   KEY `fk_mobs_has_auras_endless_tower_idx` (`stage_id`),
+  KEY `fk_mobs_has_auras_mobs_idx` (`mobs_id`),
   CONSTRAINT `fk_mobs_has_auras_auras1` FOREIGN KEY (`auras_id`) REFERENCES `auras` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_mobs_has_auras_endless_tower` FOREIGN KEY (`stage_id`) REFERENCES `stages` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_mobs_has_auras_mobs1` FOREIGN KEY (`mobs_id`) REFERENCES `mobs` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `fk_mobs_has_auras_mobs` FOREIGN KEY (`mobs_id`) REFERENCES `mobs` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=142 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -120,6 +120,7 @@ CREATE TABLE `endless_tower` (
 
 LOCK TABLES `endless_tower` WRITE;
 /*!40000 ALTER TABLE `endless_tower` DISABLE KEYS */;
+INSERT INTO `endless_tower` VALUES (1,1,1,1),(2,2,2,2),(3,3,3,3),(4,4,3,4),(5,5,4,5),(6,5,5,5),(7,6,6,4),(8,7,7,5),(9,8,7,6),(10,9,8,7),(11,10,8,8),(12,11,9,6),(13,12,9,7),(14,13,10,3),(15,14,11,9),(16,14,NULL,10),(17,15,12,11),(18,15,NULL,12),(19,16,13,10),(20,16,NULL,13),(21,17,14,14),(22,17,NULL,12),(23,18,15,14),(24,18,NULL,7),(25,19,16,4),(26,20,17,6),(27,21,18,15),(28,21,NULL,3),(29,22,18,1),(30,22,NULL,16),(31,23,19,17),(32,23,NULL,16),(33,24,19,18),(34,24,NULL,11),(35,25,20,19),(36,25,NULL,4),(37,37,21,19),(38,27,22,3),(39,27,23,NULL),(40,28,23,2),(41,28,NULL,20),(42,29,24,19),(43,29,NULL,20),(44,30,24,4),(45,30,NULL,1),(46,30,NULL,2),(47,31,25,3),(48,31,26,19),(49,32,27,3),(50,32,NULL,21),(51,33,27,5),(52,33,NULL,22),(53,34,27,3),(54,34,NULL,4),(55,35,25,1),(56,35,28,NULL),(57,36,29,23),(58,36,30,NULL),(59,37,31,6),(60,37,NULL,22),(61,38,11,22),(62,38,NULL,24),(63,39,11,11),(64,39,NULL,19),(65,39,NULL,12),(66,40,32,6),(67,40,18,22),(68,41,33,16),(69,41,NULL,13),(70,42,34,8),(71,42,35,NULL),(72,43,36,25),(73,43,NULL,37),(74,44,36,16),(75,44,NULL,19),(76,45,37,2),(77,45,38,27),(78,46,39,3),(79,46,38,4),(80,47,34,4),(81,47,40,7),(82,48,41,6),(83,48,NULL,19),(84,49,30,23),(85,49,NULL,11),(86,50,29,23),(87,50,30,NULL),(88,51,42,28),(89,51,43,29),(90,52,44,28),(91,52,43,30),(92,52,NULL,16),(93,53,45,12),(94,53,10,3),(95,53,NULL,31),(96,54,10,5),(97,54,NULL,4),(98,54,NULL,7),(99,55,46,4),(100,57,NULL,23),(101,57,NULL,19),(102,58,34,5),(103,58,34,13),(104,58,47,32),(105,59,48,4),(106,59,49,28),(107,60,50,17),(108,60,NULL,22),(109,61,51,33),(110,61,NULL,34),(111,61,NULL,11),(112,61,NULL,3),(113,62,28,13),(114,62,19,32),(115,62,NULL,19),(116,62,NULL,35),(117,64,52,36),(118,64,52,NULL),(119,64,53,29),(120,66,54,11),(121,66,55,32),(122,66,NULL,33),(123,67,56,18),(124,67,57,3),(125,67,NULL,4),(126,68,56,37),(127,68,56,14),(128,68,58,12),(129,69,59,34),(130,69,60,30),(131,69,NULL,18),(132,70,59,38),(133,70,59,20),(134,70,60,17),(135,71,61,38),(136,71,61,NULL),(137,71,62,6),(138,72,63,28),(139,72,63,12),(140,72,62,3),(141,72,NULL,38);
 /*!40000 ALTER TABLE `endless_tower` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,8 +158,11 @@ DROP TABLE IF EXISTS `mobs`;
 CREATE TABLE `mobs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
-  `is_boss` tinyint(4) unsigned zerofill DEFAULT '0000',
-  PRIMARY KEY (`id`)
+  `is_boss` tinyint(1) unsigned zerofill DEFAULT '0',
+  `mob_type_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_mob_mob_type_idx` (`mob_type_id`),
+  CONSTRAINT `fk_mob_mob_type` FOREIGN KEY (`mob_type_id`) REFERENCES `mob_types` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -168,36 +172,8 @@ CREATE TABLE `mobs` (
 
 LOCK TABLES `mobs` WRITE;
 /*!40000 ALTER TABLE `mobs` DISABLE KEYS */;
-INSERT INTO `mobs` VALUES (1,'Goblins',0000),(2,'Pamkuma',0000),(3,'Larva',0000),(4,'Gold Ingot Spider',0000),(5,'Spider',0000),(6,'Dark Spider',0000),(7,'Garuda',0000),(8,'Gold Mane Gnoll',0000),(9,'Kobold',0000),(10,'Skeleton',0000),(11,'Frozen Skeleton',0000),(12,'Frozen Zombie',0000),(13,'Zombie',0000),(14,'Budge Dragon',0000),(15,'Dragon',0000),(16,'Jade Elemental',0000),(17,'Elemental',0000),(18,'Bull Horn',0000),(19,'Dark Follower',0000),(20,'Paper Devil',0000),(21,'Forbidden Book Devil',0000),(22,'Larva King',0001),(23,'Kunikulus',0000),(24,'Fallen Templar',0000),(25,'Gargoyle',0001),(26,'Thrasher',0000),(27,'Dullahan Knight',0000),(28,'Orman',0001),(29,'Tall',0001),(30,'Whirlwind Knight',0000),(31,'Flame Worshipper',0000),(32,'Magic Gem-intoxicated Venti',0001),(33,'Sand Monkey',0000),(34,'Heston',0001),(35,'Sand Devil',0000),(36,'Broll',0000),(37,'Menacing Venti',0001),(38,'Gremlin',0000),(39,'Boobalus',0001),(40,'Red Kiconius',0000),(41,'Blue Kiconius',0000),(42,'Kisellos',0001),(43,'Nipper',0000),(44,'Gainox',0001),(45,'Belgaterm',0001),(46,'Blood Tooth Fighter',0000),(47,'Nobility Alliance',0000),(48,'Cheerful Aries',0001),(49,'Mixed Paper',0000),(50,'Mimic',0000),(51,'Paper Clown',0000),(52,'Bloodlust Tall',0000),(53,'Infected Dracans',0000),(54,'Swift Pamela',0001),(55,'Dark Zealot',0000),(56,'Ruthless Vachenrode',0001),(57,'Black Abyssal Balrog',0000),(58,'Deosizer',0001),(59,'Anilata',0001),(60,'Crusader',0000),(61,'Salkless',0001),(62,'Evil Larva',0000),(63,'Zurataken',0001);
+INSERT INTO `mobs` VALUES (1,'Goblins',0,1),(2,'Pamkuma',0,1),(3,'Larva',0,1),(4,'Gold Ingot Spider',0,2),(5,'Spider',0,3),(6,'Dark Spider',0,3),(7,'Garuda',0,1),(8,'Gold Mane Gnoll',0,1),(9,'Kobold',0,4),(10,'Skeleton',0,5),(11,'Frozen Skeleton',0,5),(12,'Frozen Zombie',0,5),(13,'Zombie',0,5),(14,'Budge Dragon',0,6),(15,'Dragon',0,6),(16,'Jade Elemental',0,2),(17,'Elemental',0,2),(18,'Bull Horn',0,4),(19,'Dark Follower',0,7),(20,'Paper Devil',0,1),(21,'Forbidden Book Devil',0,1),(22,'Larva King',1,1),(23,'Kunikulus',0,1),(24,'Fallen Templar',0,2),(25,'Gargoyle',1,1),(26,'Thrasher',0,1),(27,'Dullahan Knight',0,5),(28,'Orman',1,2),(29,'Tall',1,1),(30,'Whirlwind Knight',0,7),(31,'Flame Worshipper',0,1),(32,'Magic Gem-intoxicated Venti',1,1),(33,'Sand Monkey',0,1),(34,'Heston',1,7),(35,'Sand Devil',0,1),(36,'Broll',0,1),(37,'Menacing Venti',1,1),(38,'Gremlin',0,1),(39,'Boobalus',1,1),(40,'Red Kiconius',0,1),(41,'Blue Kiconius',0,1),(42,'Kisellos',1,7),(43,'Nipper',0,4),(44,'Gainox',1,4),(45,'Belgaterm',1,1),(46,'Blood Tooth Fighter',0,1),(47,'Nobility Alliance',0,7),(48,'Cheerful Aries',1,7),(49,'Mixed Paper',0,2),(50,'Mimic',0,2),(51,'Paper Clown',0,2),(52,'Bloodlust Tall',0,1),(53,'Infected Dracans',0,1),(54,'Swift Pamela',1,7),(55,'Dark Zealot',0,7),(56,'Ruthless Vachenrode',1,7),(57,'Black Abyssal Balrog',0,1),(58,'Deosizer',1,7),(59,'Anilata',1,7),(60,'Crusader',0,7),(61,'Salkless',1,2),(62,'Evil Larva',0,1),(63,'Zurataken',1,1);
 /*!40000 ALTER TABLE `mobs` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `mobs_mob_types`
---
-
-DROP TABLE IF EXISTS `mobs_mob_types`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `mobs_mob_types` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `mob_types_id` int(11) NOT NULL,
-  `mobs_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_mob_types_has_mobs_mobs1_idx` (`mobs_id`),
-  KEY `fk_mob_types_has_mobs_mob_types1_idx` (`mob_types_id`),
-  CONSTRAINT `fk_mob_types_has_mobs_mob_types1` FOREIGN KEY (`mob_types_id`) REFERENCES `mob_types` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_mob_types_has_mobs_mobs1` FOREIGN KEY (`mobs_id`) REFERENCES `mobs` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `mobs_mob_types`
---
-
-LOCK TABLES `mobs_mob_types` WRITE;
-/*!40000 ALTER TABLE `mobs_mob_types` DISABLE KEYS */;
-/*!40000 ALTER TABLE `mobs_mob_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -266,7 +242,7 @@ CREATE TABLE `stages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `details` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -275,6 +251,7 @@ CREATE TABLE `stages` (
 
 LOCK TABLES `stages` WRITE;
 /*!40000 ALTER TABLE `stages` DISABLE KEYS */;
+INSERT INTO `stages` VALUES (1,'2 Attack Aura'),(2,'2 Defense Aura'),(3,'1 Elite + 1 Healing Aura'),(4,'1 Elite + 2 Attack Acceleration'),(5,'1 Elite + 2 Defense Acceleration'),(6,'1 Elite + 2 Attack Acceleration'),(7,'1 Elite + 2 Defense Acceleration'),(8,'1 Elite + 4 Skin'),(9,'1 Elite + 2 Ignite'),(10,'1 Elite Cold + 1 Elite + 1 Cold'),(11,'1 Elite + 4 Skin'),(12,'1 Elite Ignite + 2 Ignite'),(13,'1 Elite + 2 Healing Aura'),(14,'1 Elite Rage: Ensnare + 1 Elite Rage: Freeze + 1 Rage: Freeze'),(15,'1 Elite Invincibility Aura + 1 Elite + 2 Rage: Knockback'),(16,'1 Elite Fiery Chain + 1 Elite + 3 Rage: Freeze'),(17,'2 Elite Rage: Knockback + 2 Rage: Stun'),(18,'1 Elite Ignite, 3 Rage: Stun, sehr viele ranged'),(19,'2 Elite Attack Acceleration + 3 Attack Acceleration'),(20,'2 Elite Skin'),(21,'2 Elite + 2 Healing Aura + 2 Rage: Fear'),(22,'2 Elite Attack Aura + 1 Great Oblivion Explosion'),(23,'2 Lightning Ring + 2 Great Oblivion Explosion'),(24,'1 Elite Fire Ring + 1 Invincibility Aura'),(25,'2 Elite Attack Acceleration + 2 Mana Burn'),(26,'1 Elite Mana Burn + 1 Elite + 4 Mana Burn'),(27,'Boss + 2 Elite + 2 Healing Aura'),(28,'2 Elite Defense Aura + 4 Multiplication'),(29,'2 Mana Burn + 3 Multiplication'),(30,'1 Defense Aura + 1 Attack Aura + 5 Attack Acceleration'),(31,'Boss + 1 Elite Healing Aura + 5 Mana Burn'),(32,'1 Elite Healing Aura + 1 Elite + 1 Healing Aura + 3 Rage: Slow'),(33,'2 Elite Defense Acceleration + 2 Elite + 4 Weakening Curse'),(34,'4 Elites'),(35,'2 Bosses Attack Aura, Adds spawn during fight'),(36,'Boss Fiery Crash + 4 Fiery Crash'),(37,'6 Skin + 4 Weakening Curse'),(38,'2 Elite Weakening Curse + 4 Rage: Airborne'),(39,'1 Elite Invincibility + 1 Elite Mana Burn + 4 Rage: Knockback'),(40,'Boss Weakening Curse + 8 Skin'),(41,'2 Elite Fiery Chain + ?? Great Obvlivion Explosion'),(42,'Boss + Boss Image + 4 Cold'),(43,'2 Elite Oblivion Explosion + 4 Rage: Blind'),(44,'1 Elite + 6 Mana Burn + 4 Great Oblivion Explosion'),(45,'Boss + 1 Elite Wave + 6 Defense Aura'),(46,'Boss Healing Aura + 2 Elite Attack Acceleration'),(47,'Boss Attack Acceleration + Boss Image + 4 Ignite'),(48,'10 Skin + 4 Mana Burn'),(49,'2 Invincibility Aura + 4 Fiery Crash'),(50,'Boss Fiery Crash + 4 Fiery Crash'),(51,'Boss + 4 Swamp Aura + 2 Swamp Ghost'),(52,'Boss Swamp Aura + 2 Great Oblivion Explosion + 4 Fire Ghost'),(53,'4 Elite Rage: Knockback + 2 Healing Aura + 2 Black Hole'),(54,'2 Elite Defense Acceleration + 4 Attack Acceleration + 4 Ignite'),(55,'4 Elite Attack Acceleration'),(56,'TBD'),(57,'2 Bosses Fiery Crash + 10 Mana Burn'),(58,'2 Bosses + Images + 2 Elite Defense Acceleration + 2 Fiery Chain + 2 Bulwark'),(59,'Boss Attack Acceleration + 2 Elite Swamp Aura + 2 Elite + 2 Swamp Aura'),(60,'3 Elite Lightning Ring + 3 Elite + 6 Weakening Curse'),(61,'2 Elite Big Fish + 2 Elite Catch Him + 2 Invincibility Aura + 2 Healing Aura'),(62,'Boss Fiery Chain + 2 Elite Bulwark + 3 Mana Burn + 3 Contaminated Area'),(63,'TBD'),(64,'2 Bosses Tsunami + 2 Swamp Ghost'),(65,'TBD'),(66,'Boss Invincibility Aura + 2 Elite Bulwark + 2 Elite Big Fish + 2 Elite'),(67,'2 Elite Fire Ring + 4 Healing Aura + 9 Attack Acceleration'),(68,'Boss Rage: Stun + Boss Oblivion Explosion + Boss Rage: Knockback'),(69,'Boss + 2 Elite Catch Him + 5 Fire Ghost + 5 Fire Ring'),(70,'1 Boss Buckshot + 1 Boss + 4 Elite Multiplication + 1 Elite Lightning Ring + 1 Elite'),(71,'Rage'),(72,'1 Boss Swamp Aura + 1 Boss Rage: Knockback + 2 Elite Healing Aura + 4 Buckshot'),(73,'TBD'),(74,'TBD'),(75,'TBD'),(76,'TBD'),(77,'TBD'),(78,'TBD'),(79,'TBD'),(80,'TBD'),(81,'TBD'),(82,'TBD'),(83,'TBD'),(84,'TBD'),(85,'TBD'),(86,'TBD'),(87,'TBD'),(88,'TBD'),(89,'TBD'),(90,'TBD'),(91,'TBD'),(92,'TBD'),(93,'TBD'),(94,'TBD'),(95,'TBD'),(96,'TBD'),(97,'TBD'),(98,'TBD'),(99,'TBD'),(100,'TBD');
 /*!40000 ALTER TABLE `stages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -348,4 +325,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-12 10:42:49
+-- Dump completed on 2017-12-14 10:52:57
