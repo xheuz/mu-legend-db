@@ -106,11 +106,11 @@ CREATE TABLE `endless_tower` (
   `auras_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_mobs_has_auras_auras1_idx` (`auras_id`),
-  KEY `fk_mobs_has_auras_mobs1_idx` (`mobs_id`),
   KEY `fk_mobs_has_auras_endless_tower_idx` (`stage_id`),
+  KEY `fk_mobs_has_auras_mobs_idx` (`mobs_id`),
   CONSTRAINT `fk_mobs_has_auras_auras1` FOREIGN KEY (`auras_id`) REFERENCES `auras` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_mobs_has_auras_endless_tower` FOREIGN KEY (`stage_id`) REFERENCES `stages` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_mobs_has_auras_mobs1` FOREIGN KEY (`mobs_id`) REFERENCES `mobs` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_mobs_has_auras_mobs` FOREIGN KEY (`mobs_id`) REFERENCES `mobs` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=142 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -159,7 +159,10 @@ CREATE TABLE `mobs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `is_boss` tinyint(1) unsigned zerofill DEFAULT '0',
-  PRIMARY KEY (`id`)
+  `mob_type_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_mob_mob_type_idx` (`mob_type_id`),
+  CONSTRAINT `fk_mob_mob_type` FOREIGN KEY (`mob_type_id`) REFERENCES `mob_types` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -169,37 +172,8 @@ CREATE TABLE `mobs` (
 
 LOCK TABLES `mobs` WRITE;
 /*!40000 ALTER TABLE `mobs` DISABLE KEYS */;
-INSERT INTO `mobs` VALUES (1,'Goblins',0),(2,'Pamkuma',0),(3,'Larva',0),(4,'Gold Ingot Spider',0),(5,'Spider',0),(6,'Dark Spider',0),(7,'Garuda',0),(8,'Gold Mane Gnoll',0),(9,'Kobold',0),(10,'Skeleton',0),(11,'Frozen Skeleton',0),(12,'Frozen Zombie',0),(13,'Zombie',0),(14,'Budge Dragon',0),(15,'Dragon',0),(16,'Jade Elemental',0),(17,'Elemental',0),(18,'Bull Horn',0),(19,'Dark Follower',0),(20,'Paper Devil',0),(21,'Forbidden Book Devil',0),(22,'Larva King',1),(23,'Kunikulus',0),(24,'Fallen Templar',0),(25,'Gargoyle',1),(26,'Thrasher',0),(27,'Dullahan Knight',0),(28,'Orman',1),(29,'Tall',1),(30,'Whirlwind Knight',0),(31,'Flame Worshipper',0),(32,'Magic Gem-intoxicated Venti',1),(33,'Sand Monkey',0),(34,'Heston',1),(35,'Sand Devil',0),(36,'Broll',0),(37,'Menacing Venti',1),(38,'Gremlin',0),(39,'Boobalus',1),(40,'Red Kiconius',0),(41,'Blue Kiconius',0),(42,'Kisellos',1),(43,'Nipper',0),(44,'Gainox',1),(45,'Belgaterm',1),(46,'Blood Tooth Fighter',0),(47,'Nobility Alliance',0),(48,'Cheerful Aries',1),(49,'Mixed Paper',0),(50,'Mimic',0),(51,'Paper Clown',0),(52,'Bloodlust Tall',0),(53,'Infected Dracans',0),(54,'Swift Pamela',1),(55,'Dark Zealot',0),(56,'Ruthless Vachenrode',1),(57,'Black Abyssal Balrog',0),(58,'Deosizer',1),(59,'Anilata',1),(60,'Crusader',0),(61,'Salkless',1),(62,'Evil Larva',0),(63,'Zurataken',1);
+INSERT INTO `mobs` VALUES (1,'Goblins',0,1),(2,'Pamkuma',0,1),(3,'Larva',0,1),(4,'Gold Ingot Spider',0,2),(5,'Spider',0,3),(6,'Dark Spider',0,3),(7,'Garuda',0,1),(8,'Gold Mane Gnoll',0,1),(9,'Kobold',0,4),(10,'Skeleton',0,5),(11,'Frozen Skeleton',0,5),(12,'Frozen Zombie',0,5),(13,'Zombie',0,5),(14,'Budge Dragon',0,6),(15,'Dragon',0,6),(16,'Jade Elemental',0,2),(17,'Elemental',0,2),(18,'Bull Horn',0,4),(19,'Dark Follower',0,7),(20,'Paper Devil',0,1),(21,'Forbidden Book Devil',0,1),(22,'Larva King',1,1),(23,'Kunikulus',0,1),(24,'Fallen Templar',0,2),(25,'Gargoyle',1,1),(26,'Thrasher',0,1),(27,'Dullahan Knight',0,5),(28,'Orman',1,2),(29,'Tall',1,1),(30,'Whirlwind Knight',0,7),(31,'Flame Worshipper',0,1),(32,'Magic Gem-intoxicated Venti',1,1),(33,'Sand Monkey',0,1),(34,'Heston',1,7),(35,'Sand Devil',0,1),(36,'Broll',0,1),(37,'Menacing Venti',1,1),(38,'Gremlin',0,1),(39,'Boobalus',1,1),(40,'Red Kiconius',0,1),(41,'Blue Kiconius',0,1),(42,'Kisellos',1,7),(43,'Nipper',0,4),(44,'Gainox',1,4),(45,'Belgaterm',1,1),(46,'Blood Tooth Fighter',0,1),(47,'Nobility Alliance',0,7),(48,'Cheerful Aries',1,7),(49,'Mixed Paper',0,2),(50,'Mimic',0,2),(51,'Paper Clown',0,2),(52,'Bloodlust Tall',0,1),(53,'Infected Dracans',0,1),(54,'Swift Pamela',1,7),(55,'Dark Zealot',0,7),(56,'Ruthless Vachenrode',1,7),(57,'Black Abyssal Balrog',0,1),(58,'Deosizer',1,7),(59,'Anilata',1,7),(60,'Crusader',0,7),(61,'Salkless',1,2),(62,'Evil Larva',0,1),(63,'Zurataken',1,1);
 /*!40000 ALTER TABLE `mobs` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `mobs_mob_types`
---
-
-DROP TABLE IF EXISTS `mobs_mob_types`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `mobs_mob_types` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `mob_types_id` int(11) NOT NULL,
-  `mobs_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_mob_types_has_mobs_mobs1_idx` (`mobs_id`),
-  KEY `fk_mob_types_has_mobs_mob_types1_idx` (`mob_types_id`),
-  CONSTRAINT `fk_mob_types_has_mobs_mob_types1` FOREIGN KEY (`mob_types_id`) REFERENCES `mob_types` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_mob_types_has_mobs_mobs1` FOREIGN KEY (`mobs_id`) REFERENCES `mobs` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `mobs_mob_types`
---
-
-LOCK TABLES `mobs_mob_types` WRITE;
-/*!40000 ALTER TABLE `mobs_mob_types` DISABLE KEYS */;
-INSERT INTO `mobs_mob_types` VALUES (1,1,1),(2,1,2),(3,1,3),(4,2,4),(5,3,5),(6,3,6),(7,1,7),(8,1,8),(9,4,9),(10,5,10),(11,5,11),(12,5,12),(13,5,13),(14,6,14),(15,6,15),(16,2,16),(17,2,17),(18,4,18),(19,7,19),(20,1,20),(21,1,21),(22,1,22),(23,1,23),(24,2,24),(25,1,25),(26,1,26),(27,5,27),(28,2,28),(29,1,29),(30,7,30),(31,1,31),(32,1,32),(33,1,33),(34,7,34),(35,1,35),(36,1,36),(37,1,37),(38,1,38),(39,1,39),(40,1,40),(41,1,41),(42,7,42),(43,4,43),(44,4,44),(45,1,45),(46,1,46),(47,7,47),(48,7,48),(49,2,49),(50,2,50),(51,2,51),(52,1,52),(53,1,53),(54,7,54),(55,7,55),(56,7,56),(57,1,57),(58,7,58),(59,7,59),(60,7,60),(61,2,61),(62,1,62),(63,1,63);
-/*!40000 ALTER TABLE `mobs_mob_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -351,4 +325,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-13 13:41:17
+-- Dump completed on 2017-12-14 10:52:57
