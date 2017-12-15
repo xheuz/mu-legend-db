@@ -16,12 +16,35 @@ app.get('/classes', function (req, res) {
     })
 });
 
+app.get('/classes/:id', function (req, res) {
+    res.contentType('application/json');
+
+    Models.class.findAll({
+        where: {
+            id: req.params.id
+        },
+        include: [Models.skill, Models.subclass]
+    }).then(classes => {
+        res.send(classes);
+    })
+});
+
 app.get('/classes/:id/skills', function (req, res) {
     res.contentType('application/json');
 
     Models.class.findById(req.params.id).then(desiredClass => {
         desiredClass.getSkills().then(classSkills => {
             res.send(classSkills);
+        })
+    })
+});
+
+app.get('/classes/:id/subclasses', function (req, res) {
+    res.contentType('application/json');
+
+    Models.class.findById(req.params.id).then(desiredClass => {
+        desiredClass.getSubclasses().then(classSubclasses => {
+            res.send(classSubclasses);
         })
     })
 });
@@ -50,13 +73,38 @@ app.get('/subclasses', function (req, res) {
     })
 });
 
-app.get('/classes/:id/subclasses', function (req, res) {
+app.get('/endless', function (req, res) {
     res.contentType('application/json');
 
-    Models.class.findById(req.params.id).then(desiredClass => {
-        desiredClass.getSubclasses().then(classSubclasses => {
-            res.send(classSubclasses);
-        })
+    Models.endless_tower.findAll({
+        include: [{
+            model: Models.mob, include: [
+                { model: Models.mob_type }
+            ]
+        },
+        Models.aura,
+        Models.stage]
+    }).then(stages => {
+        res.send(stages);
+    })
+});
+
+app.get('/endless/:id', function (req, res) {
+    res.contentType('application/json');
+
+    Models.endless_tower.findAll({
+        where: {
+            stage_id: req.params.id
+        },
+        include: [{
+            model: Models.mob, include: [
+                { model: Models.mob_type }
+            ]
+        },
+        Models.aura,
+        Models.stage]
+    }).then(stage => {
+        res.send(stage);
     })
 });
 

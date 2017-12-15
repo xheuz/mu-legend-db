@@ -1,4 +1,6 @@
 'use strict';
+const imgUrl = 'http://mulegendb.info/server/images/';
+
 module.exports = (sequelize, DataTypes) => {
     const Artifact = sequelize.define('artifact', {
         id: {
@@ -19,6 +21,11 @@ module.exports = (sequelize, DataTypes) => {
         }
     }, {
             timestamps: false,
+            getterMethods: {
+                imgUrl: function () {
+                    return imgUrl + 'artifacts/' + this.id + '.png';
+                }
+            }
         });
 
     const artifacts = Artifact.build();
