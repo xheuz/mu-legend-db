@@ -11,10 +11,10 @@ class Artifacts extends Component {
     }
 
     componentDidMount() {
-        this.CharacterList();
+        this.ArtifactsList();
     }
 
-    CharacterList() {
+    ArtifactsList() {
         fetch('http://ec2-52-27-199-57.us-west-2.compute.amazonaws.com:7475/artifacts')
         .then( (results) => results.json())
         .then(data => {
