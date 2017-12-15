@@ -5,6 +5,7 @@ import Classes from '../classes/class.component'
 import Instances from '../instances/instance.component'
 import Items from '../items/item.component'
 import ClassDetails from '../classes/class-detail.component'
+import Artifacts from '../artifacts/artifacts.component'
 
 // Configure all routes here
 const Main = () => (
@@ -14,6 +15,7 @@ const Main = () => (
         <Route exact path='/classes/:classid' component={ClassDetails} />
         <Route exact path='/instances' component={Instances} />
         <Route exact path='/items' component={Items} />
+        <Route exact path='/artifacts' component={Artifacts} />
     </Switch>
 )
 
