@@ -8,9 +8,23 @@ class Subclass extends Component {
         }
     }
 
+    componentDidMount() {
+        if(this.props.subclasses) {
+            this.SubClassesList()
+        }
+    }
+
+    SubClassesList() {
+        let subclasses = this.props.subclasses.map((subclass, indx) => (
+            <div key={indx}>{subclass.name}</div>
+        ))
+
+        this.setState({subclasses: subclasses});
+    }
+
     render(){
         return(
-            <div>subclass</div>
+            <div>{this.state.subclasses}</div>
         )
     }
 }
