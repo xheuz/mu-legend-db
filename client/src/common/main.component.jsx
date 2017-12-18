@@ -6,6 +6,7 @@ import Instances from '../instances/instance.component'
 import Items from '../items/item.component'
 import ClassDetails from '../classes/class-detail.component'
 import Artifacts from '../artifacts/artifacts.component'
+import EndlessTower from '../instances/endless-tower/endlesstower.component'
 
 // Configure all routes here
 const Main = () => (
@@ -16,6 +17,7 @@ const Main = () => (
         <Route exact path='/instances' component={Instances} />
         <Route exact path='/items' component={Items} />
         <Route exact path='/artifacts' component={Artifacts} />
+        <Route exact path='/instances/endless-tower' component={EndlessTower} />
     </Switch>
 )
 

@@ -16,8 +16,10 @@ class Navigation extends Component {
                     <Nav>
                         <NavItem eventKey={1} href="/">Home</NavItem>
                         <NavItem eventKey={2} href="/classes">Classes</NavItem>
-                        <NavItem eventKey={3} href="/instances">Instances</NavItem>
-                        <NavDropdown eventKey={4} title="Items" id="basic-nav-dropdown">
+                        <NavDropdown eventKey={3} title="Instances" id="basic-nav-dropdown2">
+                            <MenuItem eventKey={4.2} href="/instances/endless-tower">Endless Tower</MenuItem>
+                        </NavDropdown>
+                        <NavDropdown eventKey={4} title="Items" id="basic-nav-dropdown3">
                             <MenuItem eventKey={4.1}>Equipment</MenuItem>
                             <MenuItem eventKey={4.2} href="/artifacts">Artifacts</MenuItem>
                             <MenuItem eventKey={4.3}>Other</MenuItem>
