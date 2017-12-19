@@ -73,4 +73,39 @@ app.get('/subclasses', function (req, res) {
     })
 });
 
+app.get('/endless', function (req, res) {
+    res.contentType('application/json');
+
+    Models.endless_tower.findAll({
+        include: [{
+            model: Models.mob, include: [
+                { model: Models.mob_type }
+            ]
+        },
+        Models.aura,
+        Models.stage]
+    }).then(stages => {
+        res.send(stages);
+    })
+});
+
+app.get('/endless/:id', function (req, res) {
+    res.contentType('application/json');
+
+    Models.endless_tower.findAll({
+        where: {
+            stage_id: req.params.id
+        },
+        include: [{
+            model: Models.mob, include: [
+                { model: Models.mob_type }
+            ]
+        },
+        Models.aura,
+        Models.stage]
+    }).then(stage => {
+        res.send(stage);
+    })
+});
+
 app.listen(7475)
