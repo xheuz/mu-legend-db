@@ -32,7 +32,7 @@ app.post('/user', function (req, res) {
         });
 });
 
-app.use(auth);
+// app.use(auth);
 
 app.get('/classes', function (req, res) {
     res.contentType('application/json');

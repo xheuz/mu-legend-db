@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
             unique: true,
             allowNull: false
         }
-    }, {//handle non unique values
+    }, {
             hooks: {
                 beforeCreate: function(user, done) {
                     user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
