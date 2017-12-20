@@ -4,11 +4,13 @@ var fs = require('fs');
 var path = require('path');
 var Sequelize = require('sequelize');
 var basename = path.basename(__filename);
-var config = require('../config/dbcon.js');
 var db = {};
 
-var sequelize = new Sequelize(config.database, config.username, config.password, config);
-
+var sequelize = new Sequelize(process.env.DATABASE, process.env.USERNAME, process.env.PASSWORD, {
+    host: process.env.HOSTNAME,
+    port: process.env.PORT,
+    dialect: 'mysql'
+});
 
 fs
     .readdirSync(__dirname)
