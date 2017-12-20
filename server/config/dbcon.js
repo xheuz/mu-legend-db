@@ -2,7 +2,7 @@ module.exports = {
 
     username: 'user',
     password: 'pass',
-    database: 'mudb',
+    database: 'database',
     host: 'localhost',
     port: 3306,
     dialect: 'mysql'
