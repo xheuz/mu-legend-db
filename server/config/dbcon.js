@@ -1,7 +1,7 @@
 module.exports = {
 
-    username: 'root',
-    password: 'root',
+    username: 'user',
+    password: 'pass',
     database: 'mudb',
     host: 'localhost',
     port: 3306,
