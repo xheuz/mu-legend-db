@@ -1,18 +1,44 @@
 const express = require('express');
 const app = express();
 const Models = require('./models');
+const auth = require('./auth');
 
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
+var bodyParser = require('body-parser')
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+})); 
+
+let response = function(data, status) {
+    return {
+        "data": data,
+        "status": status
+    }
+};
+
+app.post('/user', function (req, res) {
+    res.contentType('application/json');
+
+    Models.user.create({
+        username: req.body.username,
+        password: req.body.password,
+        email: req.body.email
+    })
+    .then(newUser => {
+        res.send(response(newUser, res.statusCode));
+    }).catch(err => {
+        let errMsg;
+        res.send(response({"message":"Duplicate value found for " + Object.keys(err.fields)}, res.statusCode));
+        });
 });
+
+// app.use(auth);
 
 app.get('/classes', function (req, res) {
     res.contentType('application/json');
 
     Models.class.findAll().then(classes => {
-        res.send(classes);
+        res.send(response(classes, res.statusCode));
     })
 });
 
@@ -25,7 +51,7 @@ app.get('/classes/:id', function (req, res) {
         },
         include: [Models.skill, Models.subclass]
     }).then(classes => {
-        res.send(classes);
+        res.send(response(classes, res.statusCode));
     })
 });
 
@@ -34,7 +60,7 @@ app.get('/classes/:id/skills', function (req, res) {
 
     Models.class.findById(req.params.id).then(desiredClass => {
         desiredClass.getSkills().then(classSkills => {
-            res.send(classSkills);
+            res.send(response(classSkills, res.statusCode));
         })
     })
 });
@@ -44,7 +70,7 @@ app.get('/classes/:id/subclasses', function (req, res) {
 
     Models.class.findById(req.params.id).then(desiredClass => {
         desiredClass.getSubclasses().then(classSubclasses => {
-            res.send(classSubclasses);
+            res.send(response(classSubclasses, res.statusCode));
         })
     })
 });
@@ -53,7 +79,7 @@ app.get('/artifacts', function (req, res) {
     res.contentType('application/json');
 
     Models.artifact.findAll().then(artifacts => {
-        res.send(artifacts);
+        res.send(response(artifacts, res.statusCode));
     })
 });
 
@@ -61,7 +87,7 @@ app.get('/artifacts/:id', function (req, res) {
     res.contentType('application/json');
 
     Models.artifact.findById(req.params.id).then(desiredArtifact => {
-        res.send(desiredArtifact);
+        res.send(response(desiredArtifact, res.statusCode));
     })
 });
 
@@ -69,7 +95,7 @@ app.get('/subclasses', function (req, res) {
     res.contentType('application/json');
 
     Models.subclass.findAll().then(subclasses => {
-        res.send(subclasses);
+        res.send(response(subclasses, res.statusCode));
     })
 });
 
@@ -85,7 +111,7 @@ app.get('/endless', function (req, res) {
         Models.aura,
         Models.stage]
     }).then(stages => {
-        res.send(stages);
+        res.send(response(stages, res.statusCode));
     })
 });
 
@@ -104,7 +130,7 @@ app.get('/endless/:id', function (req, res) {
         Models.aura,
         Models.stage]
     }).then(stage => {
-        res.send(stage);
+        res.send(response(stage, res.statusCode));
     })
 });
 
