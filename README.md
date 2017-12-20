@@ -18,7 +18,6 @@ mu-legend-db
 
 ## Before starting the application
 Make sure that you download all dependencies by running the following command either in `client/` or `server/`:
-
 ```
 (npm|yarn) install
 ```
