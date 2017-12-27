@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Grid, Thumbnail } from 'react-bootstrap';
 import './class.css';
 
-const images = {
+const classImages = {
     1: "https://i.ytimg.com/vi/5Yyl07UmdDE/maxresdefault.jpg",
     2: "https://i.ytimg.com/vi/fR-46pk_Gtc/maxresdefault.jpg",
     3: "https://i.ytimg.com/vi/8JHw9YYpCn4/maxresdefault.jpg",
@@ -33,12 +33,13 @@ class Character extends Component {
     CharacterList() {
         fetch('http://ec2-52-27-199-57.us-west-2.compute.amazonaws.com:7475/classes')
         .then( (results) => results.json())
-        .then(data => {
-            let characters = data.map( (character) => {
+        .then(results => {
+            console.log(results);
+            let characters = results.data.map( (character) => {
                return (
-                    <Col xs={6} md={6} key={character.id}>
+                    <Col xs={12} md={4} key={character.id}>
                         <a className="class-skills" href={'/classes/' + character.id }>
-                            <Thumbnail src={images[character.id]} alt="242x200">
+                            <Thumbnail src={classImages[character.id]} alt="242x200">
                                 <h3>
                                     {character.name }
                                 </h3>
