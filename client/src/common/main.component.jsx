@@ -5,7 +5,7 @@ import Classes from '../classes/class.component'
 import Instances from '../instances/instance.component'
 import Items from '../items/item.component'
 import ClassDetails from '../classes/class-detail.component'
-import Artifacts from '../artifacts/artifacts.component'
+import Artifacts from '../items/artifacts/artifacts.component'
 import EndlessTower from '../instances/endless-tower/endlesstower.component'
 
 // Configure all routes here

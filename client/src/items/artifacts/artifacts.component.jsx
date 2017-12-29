@@ -18,7 +18,7 @@ class Artifacts extends Component {
         fetch('http://ec2-52-27-199-57.us-west-2.compute.amazonaws.com:7475/artifacts')
         .then( (results) => results.json())
         .then(data => {
-            let artifacts = data.map( (artifacts) => {
+            let artifacts = data.data.map( (artifacts) => {
                return (
                    <Col xs={6} md={6} key={artifacts.id}>
                         <a className="class-skills">
