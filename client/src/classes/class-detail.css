@@ -20,7 +20,6 @@
     line-height: 224px;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 1);
     font-family: 'Cinzel', serif;
-    font-weight: bold;
 }
 
 /* Skills */
@@ -40,6 +39,14 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff6600', endColorstr='#fb955e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
+.gradient-grey {
+    background: #eee; /* Old browsers */
+    background: -moz-radial-gradient(100% top left, ellipse cover, #fff 0%, #e7e7e7 37%, #e7e7e7 58%,#b6b6b6 70%,#acacac 80%); /* FF3.6-15 */
+    background: -webkit-radial-gradient(100% at top left, ellipse cover, #fff 0%,#e7e7e7 37%,#e7e7e7 58%,#b6b6b6 70%,#acacac 80%); /* Chrome10-25,Safari5.1-6 */
+    background: radial-gradient(ellipse at top left, #fff 0%,#e7e7e7 37%,#e7e7e7 58%,#b6b6b6 70%, #acacac 80%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff', endColorstr='#acacac',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
 .skill {
     margin-bottom: 20px;
     background-color: white;
@@ -51,6 +58,7 @@
     padding: 8px 10px;
     border-right: 2px solid #eee;
     position: relative;
+    cursor: pointer;
 }
 
 .skill-header * {
@@ -118,18 +126,25 @@
     border: 1px solid #eee;
 }
 
+.bar {
+    margin-top: 2px;
+}
+
 .mdb-bar {
     display: block;
-    height: 14px;
+    height: 12px;
     margin-bottom: 4px;
     width: 92%;
+    background-color: #eee;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 div.mdb-bar > span {
     display: inherit;
     height: inherit;
     font-size: 10px;
-    line-height: 15px;
+    line-height: 14px;
     color: white;
     font-weight: bold;
     padding: 0 10px;
@@ -138,15 +153,15 @@ div.mdb-bar > span {
 }
 
 .attack {
-    background-color: blue;
+    background-color: #00008c;
 }
 
 .hp {
-    background-color: red;
+    background-color: #a00000;
 }
 
 .coop {
-    background-color: gold;
+    background-color: #e4c000;
 }
 
 .subclass.footer {
@@ -159,6 +174,10 @@ div.mdb-bar > span {
 
 .subclass-name {
     font-size: 24px;
+    text-transform: capitalize;
+    font-variant: all-small-caps;
+    font-weight: bold;
+    margin-top: -12px;
 }
 
 .subclass-equipment {
@@ -167,7 +186,7 @@ div.mdb-bar > span {
     border-radius: 3px;
     padding: 2px 5px;
     color: gold;
-    margin: 5px;
+    margin: 5px 0;
 }
 
 .main-stat,

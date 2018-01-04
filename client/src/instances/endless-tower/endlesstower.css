@@ -1,61 +1,38 @@
-.thumbnail {
-    border-width: 2px;
-    /* border-color: #ff6600; */
-    padding: 0;
-}
-
-.thumbnail:hover {
-    border-color: #ff6600;
-}
-
-.thumbnail .caption {
-    padding: 0px;
-}
-
-.caption h3 {
-    font-size: 32px;
-    text-align: center;
-    margin: 0;
-    margin-bottom: 10px;
-    /* background-color: #ff6600; */
-    border-bottom: 2px solid rgb(231, 230, 230);
-    padding: 5px 0;
-    color: #ff6600;
-}
-
-.caption p {
-    padding: 5px 10px;
-    text-justify: justify;
-}
-
-a.class-skills {
-    text-decoration: none;
-}
-/* 
-a.class-skills:hover h3 {
-    color: whitesmoke;
-} */
-
-span.artifact-attribute {
-    color: chocolate;
-    /* font-weight: bold; */
-    font-size: medium;
-}
-
-span.basic-effect {
-    color: black;
-}
-
-span.level-increase {
-    color: chocolate;
-}
-
-div.artifact-thumb {
-    padding: 0 px;
+.stage {
     background-color: white;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #eee;
+    border-bottom: 3px solid #eee;
+    margin-bottom: 10px;
+    position: relative;
 }
 
-img.artifact-img {
-    display: block;
-    margin: 0 auto;
+.stage:hover {
+    background-color: whitesmoke;
+}
+
+.stage > div {
+    display: inline-block;
+}
+
+.stage-id {
+    width: 50px;
+    text-align: center;
+    padding: 10px 0;
+    padding-right: 12px;
+    vertical-align: super;
+    font-size: 28px;
+    line-height: 28px;
+}
+
+.stage-body {
+    border-left: 2px solid #ff6000;
+    padding: 10px 0;
+    padding-left: 12px;
+}
+
+.gold {
+    background-color: gold;
+    border-color: goldenrod;
 }
