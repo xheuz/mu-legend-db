@@ -2,16 +2,6 @@ import React, { Component } from 'react';
 import { Col, Row, Badge, Clearfix } from 'react-bootstrap';
 import './class-detail.css';
 
-const url = 'http://ec2-52-27-199-57.us-west-2.compute.amazonaws.com:7475';
-
-const classImages = {
-    1: "https://i.ytimg.com/vi/5Yyl07UmdDE/maxresdefault.jpg",
-    2: "https://i.ytimg.com/vi/fR-46pk_Gtc/maxresdefault.jpg",
-    3: "https://i.ytimg.com/vi/8JHw9YYpCn4/maxresdefault.jpg",
-    4: "https://i.ytimg.com/vi/FJOmYNMhSj0/maxresdefault.jpg",
-    5: "http://image.webzen.kr/mu_legend/event/20170810_emphasizer/images/img_slider3.jpg"
-}
-
 class ClassDetails extends Component {
     state = {
         data: {}
@@ -22,7 +12,7 @@ class ClassDetails extends Component {
     }
 
     getClassDetails() {
-        fetch(url + this.props.location.pathname)
+        fetch(this.props.api + this.props.location.pathname)
         .then( (results) => results.json())
         .then(results => {
             results.data[0].skills = this.groupSkillByType(results.data[0].skills);
@@ -64,7 +54,7 @@ class ClassDetails extends Component {
         if(this.state.data.length) {
             return(
                 <div className="cover">
-                    <div className="cover-image" style={{ backgroundImage: "url(" + classImages[this.props.match.params.classid] + ")" }}>
+                    <div className="cover-image" style={{ backgroundImage: "url(" + this.props.staticData[this.props.match.params.classid]['image'] + ")" }}>
                         <div className="class-name">- {this.state.data[0].name} -</div>
                     </div>
                     <Clearfix />

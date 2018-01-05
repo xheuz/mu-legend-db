@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './endlesstower.css';
 
-const url = 'http://ec2-52-27-199-57.us-west-2.compute.amazonaws.com:7475';
-
 class EndlessTower extends Component {
     constructor(props) {
         super(props);
@@ -74,7 +72,7 @@ class EndlessTower extends Component {
     }
 
     EndlessTowerStages() {
-        fetch(url + '/endless')
+        fetch(this.props.api + '/endless')
         .then( (results) => results.json())
         .then(results => {
             this.dataMerge(results.data);

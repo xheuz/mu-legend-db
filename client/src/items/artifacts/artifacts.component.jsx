@@ -15,7 +15,7 @@ class Artifacts extends Component {
     }
 
     ArtifactsList() {
-        fetch('http://ec2-52-27-199-57.us-west-2.compute.amazonaws.com:7475/artifacts')
+        fetch(this.props.api + '/artifacts')
         .then( (results) => results.json())
         .then(data => {
             let artifacts = data.data.map( (artifacts) => {
