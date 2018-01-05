@@ -10,16 +10,12 @@ class App extends Component {
       <div>
         <Navigation />
         <div className="container">
-          <Main {...this.props}/>
+          <Main />
         </div>
         <Footer />
       </div>
     );
   }
-}
-
-App.defaultProps = {
-  api: 'http://ec2-52-27-199-57.us-west-2.compute.amazonaws.com:7475'
 }
 
 export default App;

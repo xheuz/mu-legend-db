@@ -6,6 +6,7 @@ import Items from '../items/item.component'
 import ClassDetails from '../classes/class-detail.component'
 import Artifacts from '../items/artifacts/artifacts.component'
 import EndlessTower from '../instances/endless-tower/endlesstower.component'
+import { Base64 } from 'js-base64'
 
 const url = 'http://ec2-52-27-199-57.us-west-2.compute.amazonaws.com:7475';
 

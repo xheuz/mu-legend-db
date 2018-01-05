@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Grid, Thumbnail } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import './artifacts.css';
 
 class Artifacts extends Component {
@@ -18,41 +18,54 @@ class Artifacts extends Component {
         fetch(this.props.api + '/artifacts')
         .then( (results) => results.json())
         .then(data => {
-            let artifacts = data.data.map( (artifacts) => {
-               return (
-                   <Col xs={6} md={6} key={artifacts.id}>
-                        <a className="class-skills">
-                           <Thumbnail className='artifact-thumb'>
-                                <span><h3>
-                                   {artifacts.name }
-                                </h3>
-                                   <img className="artifact-img" src={artifacts.imgUrl} alt=""/>
-                                </span>
-                                <p>
-                                   <span className="artifact-attribute">Basic effect <br /></span><span className="basic-effect">{artifacts.basic_effect}</span>
-                                </p>
-                               <p>
-                                   <span className="artifact-attribute">Increase per Level:</span> <span className="level-increase">{artifacts.per_level_increase}%</span>
-                               </p>
-                               <p>
-                                   <span className="artifact-attribute">Level 20 Effect <br /></span> <span className="basic-effect">{artifacts.lvl20_effect}</span>
-                               </p>
-                            </Thumbnail>
-                        </a>
-                    </Col>
-                )
-            });
-            this.setState({ artifacts: artifacts});
+            this.setState({ artifacts: data.data});
         });
     }
 
     render() {
         return (
-            <Grid>
-                <Row>{this.state.artifacts }</Row>
-            </Grid>
+            <div className="cover">
+                <div className="cover-image" style={{backgroundImage: 'url(https://i.ytimg.com/vi/8lGo6vXcMfQ/maxresdefault.jpg)'}} alt="artifacts">
+                    <div className="class-name">- Artifacts -</div>
+                </div>
+                <ArtifactList artifacts={this.state.artifacts}/>
+            </div>
         );
     }
+}
+
+const Artifact = (props) => {
+    const style = {
+        height: '120px',
+        backgroundColor: '#000',
+        borderRadius: '5px',
+        position: 'relative',
+        padding: '5px',
+        marginBottom: '10px',
+        color: 'white',
+        overflow: 'hidden'
+    }
+    return (
+        <Col xs={6} md={6} lg={6} key={props.id}>
+            <div className="artifact" style={style}>
+                <div><img className="img-responsive" src={props.imgUrl} /></div>
+                <div className="artifact-content">
+                    <div className="artifact-title">{props.name}</div>
+                    <p>{props.basic_effect}</p>
+                    <p>At level 20: {props.lvl20_effect}</p>
+                    <p>{props.per_level_increase.toString() + '%'} per level increased.</p>
+                </div>
+            </div>
+        </Col>
+    )
+}
+
+const ArtifactList = ({artifacts}) => {
+    return (
+        <Row>
+            {artifacts.map((artifact, i) => <Artifact key={i} {...artifact} />)}
+        </Row>
+    )
 }
 
 export default Artifacts;
