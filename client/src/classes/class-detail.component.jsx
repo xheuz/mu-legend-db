@@ -63,8 +63,8 @@ class ClassDetails extends Component {
     render(){
         if(this.state.data.length) {
             return(
-                <div className="class">
-                    <div className="class-cover" style={{ backgroundImage: "url(" + classImages[this.props.match.params.classid] + ")" }}>
+                <div className="cover">
+                    <div className="cover-image" style={{ backgroundImage: "url(" + classImages[this.props.match.params.classid] + ")" }}>
                         <div className="class-name">- {this.state.data[0].name} -</div>
                     </div>
                     <Clearfix />

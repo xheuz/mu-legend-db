@@ -32,6 +32,7 @@ class Navigation extends Component {
                         <NavItem eventKey={1} href="/">Home</NavItem>
                         <NavItem eventKey={2} href="/classes">Classes</NavItem>
                         <NavDropdown eventKey={3} title="Instances" id="basic-nav-dropdown2"
+                        href = "/instances/endless-tower"
                         onMouseEnter = { () => this.handleOpen("isOpenInstances") }
                         onMouseLeave = { () => this.handleClose("isOpenInstances") }
                         open = { this.state.isOpenInstances }

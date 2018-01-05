@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Table } from 'react-bootstrap';
 import './endlesstower.css';
 
 const url = 'http://ec2-52-27-199-57.us-west-2.compute.amazonaws.com:7475';
@@ -63,9 +62,9 @@ class EndlessTower extends Component {
 
         let stages = [];
         
-        Object.keys(d).map((stage) => {
+        for(var stage in d){
             stages.push(d[stage]);
-        });
+        }
 
         this.setState({stages: stages});
     }
@@ -84,7 +83,12 @@ class EndlessTower extends Component {
 
     render() {
         return (
-            <StageList stages={this.state.stages} isBoss={this.isBoss} />
+            <div className="cover">
+                <div className="cover-image" style={{ backgroundImage: "url(https://i.ytimg.com/vi/_j01yLUg5Sc/maxresdefault.jpg)" }}>
+                    <div className="class-name">- Endless Tower -</div>
+                </div>
+                <StageList stages={this.state.stages} isBoss={this.isBoss} />
+            </div>
         );
     }
 }
@@ -98,6 +102,9 @@ const Stage = (props) => {
         <div className={"stage" + (is_boss ? ' gradient-grey' : '')} >
             {is_boss ? <span className="stage-boss gradient-orange">Boss</span> : ''}
             <div className="stage-id">{props.stage.id}</div>
+            {/* <div className="stage-map">
+                <img className="image-responsive" src={"http://mulhead.net/template/assets/mu/endless_tower/floor_" + ("000".slice(props.stage.id.toString().length) + props.stage.id.toString()) + ".png"} />
+            </div> */}
             <div className="stage-body">
                 <span className="stage-row-title">Mobs</span> {mobs.map((mob, i) => <Mob key={i} mob={props.stage.mobs[mob]} />)}
                 <br />
@@ -117,17 +124,17 @@ const StageList = (props) => {
 
 const Aura = ({aura}) => {
     return (
-        <div className="aura gradient-grey">
+        <div className="aura">
             {aura.name} {aura.times > 1 ? 'x ' + aura.times : ''}
         </div>
     )
 }
 
 const Mob = ({mob}) => {
-    console.log(mob);
     return (
         <div className="mob">
-            <span className="mob-type">{mob.mob_type.type}</span><span className={"mob-details" + (mob.is_boss ? " gradient-orange" : '')}> {mob.name} {mob.times > 1 ? 'x ' + mob.times : ''}</span>
+            <span className={"mob-type " + mob.mob_type.type.toLowerCase()}>{mob.mob_type.type}</span>
+            <span className={"mob-details" + (mob.is_boss ? " gradient-orange" : '')}>{mob.name} {mob.times > 1 ? 'x ' + mob.times : ''}</span>
         </div>
     )
 }

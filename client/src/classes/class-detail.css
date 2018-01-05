@@ -1,9 +1,9 @@
 /* Cover */
-.class {
+.cover {
     padding-top: 250px;
 }
 
-.class-cover {
+.cover-image {
     background-size: cover;
     position: absolute;
     right: 0;
