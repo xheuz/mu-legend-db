@@ -6,9 +6,9 @@ var Sequelize = require('sequelize');
 var basename = path.basename(__filename);
 var db = {};
 
-var sequelize = new Sequelize('mudb', 'root', 'root', {
-    host: 'localhost',
-    port: '3306',
+var sequelize = new Sequelize(process.env.MYSQL_DATABASE, process.env.MYSQL_USERNAME, process.env.MYSQL_PASSWORD, {
+    host: process.env.MYSQL_HOSTNAME,
+    port: process.env.MYSQL_PORT,
     dialect: 'mysql'
 });
 
