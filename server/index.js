@@ -111,7 +111,7 @@ app.get('/endless', function (req, res) {
         Models.aura,
         Models.stage]
     }).then(stages => {
-        res.send(response(stages, res.statusCode));
+        res.send(response({ imgUrl: Models.endless_tower.prototype.getImgUrl(), stages: stages}, res.statusCode));
     })
 });
 

@@ -1,4 +1,6 @@
 'use strict';
+const imgUrl = 'http://mulegendb.info/server/images/';
+
 module.exports = (sequelize, DataTypes) => {
     const Class = sequelize.define('class', {
         id: {
@@ -7,9 +9,17 @@ module.exports = (sequelize, DataTypes) => {
         },
         name: {
             type: DataTypes.STRING
+        },
+        lore: {
+            type: DataTypes.STRING
         }
     }, {
             timestamps: false,
+            getterMethods: {
+                imgUrl: function () {
+                    return imgUrl + 'classes/' + this.id + '.jpg';
+                }
+            }
         });
 
     Class.associate = function (models) {
