@@ -90,17 +90,18 @@ class EndlessTower extends Component {
 }
 
 const Stage = (props) => {
-    // let auras = Object.keys(props.auras);
-    // let mobs = Object.keys(props.mobs);
+    let auras = Object.keys(props.stage.auras);
+    let mobs = Object.keys(props.stage.mobs);
     let is_boss = props.isBoss(props.stage.mobs);
-    console.log(is_boss, props.stage);
+
     return (
-        <div className={"stage" + (is_boss ? ' gold' : '')} >
-            {is_boss ? <span className="stage-boss">Boss</span> : ''}
+        <div className={"stage" + (is_boss ? ' gradient-grey' : '')} >
+            {is_boss ? <span className="stage-boss gradient-orange">Boss</span> : ''}
             <div className="stage-id">{props.stage.id}</div>
             <div className="stage-body">
-                <div>{!!props.auras_id ? props.aura.name : ''}</div>
-                <div>{!!props.mobs_id ? props.mob.name : ''}</div>
+                <span className="stage-row-title">Mobs</span> {mobs.map((mob, i) => <Mob key={i} mob={props.stage.mobs[mob]} />)}
+                <br />
+                <span className="stage-row-title">Auras</span> {auras.map((aura, i) => <Aura key={i} aura={props.stage.auras[aura]} />)}
             </div>
         </div>
     )
@@ -114,17 +115,19 @@ const StageList = (props) => {
     )
 }
 
-const Aura = (props) => {
+const Aura = ({aura}) => {
     return (
-        <div className="aura">
-        </div>   
+        <div className="aura gradient-grey">
+            {aura.name} {aura.times > 1 ? 'x ' + aura.times : ''}
+        </div>
     )
 }
 
-const Mob = (props) => {
-    console.log(props)
+const Mob = ({mob}) => {
+    console.log(mob);
     return (
         <div className="mob">
+            <span className="mob-type">{mob.mob_type.type}</span><span className={"mob-details" + (mob.is_boss ? " gradient-orange" : '')}> {mob.name} {mob.times > 1 ? 'x ' + mob.times : ''}</span>
         </div>
     )
 }
