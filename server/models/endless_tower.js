@@ -1,4 +1,6 @@
 'use strict';
+const imgUrl = 'http://mulegendb.info/server/images/';
+
 module.exports = (sequelize, DataTypes) => {
     const EndlessTower = sequelize.define('endless_tower', {
         id: {
@@ -25,6 +27,10 @@ module.exports = (sequelize, DataTypes) => {
         models.endless_tower.belongsTo(models.stage, { foreignKey: 'stage_id' });
     }
 
-    const classes = EndlessTower.build();
+    EndlessTower.prototype.getImgUrl = function () {
+        return imgUrl + 'endlesstower/endless.jpg';
+    }
+
+    const endless = EndlessTower.build();
     return EndlessTower;
 };
