@@ -48,7 +48,7 @@ const Artifact = (props) => {
     return (
         <Col xs={6} md={6} lg={6} key={props.id}>
             <div className="artifact" style={style}>
-                <div><img className="img-responsive" src={props.imgUrl} /></div>
+                <div><img className="img-responsive" src={props.imgUrl} alt={props.name} /></div>
                 <div className="artifact-content">
                     <div className="artifact-title">{props.name}</div>
                     <p>{props.basic_effect}</p>
